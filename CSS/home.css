@@ -1,0 +1,20 @@
+h1{
+    color: aliceblue;
+/* 
+        font-family: "Trebuchet MS", Verdana, sans-serif; */
+        font-family: Snell Roundhand, cursive;
+        text-align: center;
+      
+
+   
+}
+.im{
+    background-image: url('../Image/food.jpg');
+    
+    height: 500px;
+    width: 1469px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

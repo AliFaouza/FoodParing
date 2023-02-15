@@ -13,42 +13,27 @@
 
     <script>
         $(document).ready(function(){
-            $
-        (
-            function () 
-            {
-                GetAllCategory();  
-            }
-            
-        ),
-        $('#search').keyup(
-            function(){
-                $('#result_search').html('');
-                var ingredient = $(this).val();
-
-            if(ingredient !=""){
-                $.ajax({
-                    type:'get',
-                    url:'IngredientDunecategory.php',
-                    data:'ingredient'+encodeURIComponent(ingredient),
-                    success:function(data){
-                      if(data != ""){
-                          $('#div1').empty(data);
-                         $('#div1').append(data);
-                         $('#div3').empty(data);
-                         $('#div3').append(data);
-                      }else{
-                        document.getElementById('result_search').innerHTML ="<div style='font-size: 20px; text-align: center; margin-top: 10px; color:#F5F5F5'>Aucun ingredient</div>";
-                      }
-                    }
-                })
-  
-            }
+            $(
+                function () 
+                {
+                    GetAllCategory();  
+                }
                 
-            }
-        );
-        
+            ),
+            $('#search').keyup(
+                function(){
+                    $('#result_search').html('');
+                    var ingredient = $(this).val();
 
+                    if(ingredient != ""){  
+                        IngredientDunecategory(encodeURIComponent(ingredient), '')
+                    }else{
+                        document.getElementById('result_search').innerHTML ="<div style='font-size: 20px; text-align: center; margin-top: 10px; color:#F5F5F5'>Aucun ingredient</div>";
+                    }
+                    
+                    
+                }
+            );
         });
         
     </script>

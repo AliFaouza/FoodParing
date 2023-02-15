@@ -1,34 +1,34 @@
 [
   {
     "name": "Apple",
-    "category": "fruit"
+    "category": "Fruits"
   },
   {
     "name": "Strawberry",
-    "category": "fruit"
+    "category": "Fruits"
   },
   {
     "name": "Salmon",
-    "category": "fish"
+    "category": "Fish"
   },
   {
     "name": "Beef",
-    "category": "meat"
+    "category": "Meat"
   },
   {
     "name": "Champaigne",
-    "category": "alcohol"
+    "category": "Alcohol"
   },
   {
     "name": "Vodka",
-    "category": "alcohol"
+    "category": "Alcohol"
   },
   {
     "name": "Bread",
-    "category": "grain"
+    "category": "Grain"
   },
   {
     "name": "Potato",
-    "category": "legume"
+    "category": "Vegetables"
   }
 ]

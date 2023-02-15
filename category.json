@@ -1,0 +1,27 @@
+[
+    {
+      "idcategory":1,
+      "name": "Fruits"
+    },
+    {
+      "idcategory":2,
+      "name": "Fish"
+    },
+    {
+      "idcategory":3,
+      "name": "Meat"
+    },
+    {
+      "idcategory":4,
+      "name": "Alcohol"
+    },
+    {
+      "idcategory":5,
+      "name": "Vegetables"
+    },
+    {
+      "idcategory":6,
+      "name": "Grain"
+    }
+    
+  ]

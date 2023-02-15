@@ -12,15 +12,45 @@
     <script src="./JS/JQuery 3.6.1.js"></script>
 
     <script>
-         $
+        $(document).ready(function(){
+            $
         (
             function () 
             {
                 GetAllCategory();  
             }
             
-        )
+        ),
+        $('#search').keyup(
+            function(){
+                $('#result_search').html('');
+                var ingredient = $(this).val();
 
+            if(ingredient !=""){
+                $.ajax({
+                    type:'get',
+                    url:'IngredientDunecategory.php',
+                    data:'ingredient'+encodeURIComponent(ingredient),
+                    success:function(data){
+                      if(data != ""){
+                          $('#div1').empty(data);
+                         $('#div1').append(data);
+                         $('#div3').empty(data);
+                         $('#div3').append(data);
+                      }else{
+                        document.getElementById('result_search').innerHTML ="<div style='font-size: 20px; text-align: center; margin-top: 10px; color:#F5F5F5'>Aucun ingredient</div>";
+                      }
+                    }
+                })
+  
+            }
+                
+            }
+        );
+        
+
+        });
+        
     </script>
 
 </head>
@@ -38,9 +68,12 @@
     <section class="py-5">
         <div class="container">
             <form class="d-flex ">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search">
                 <button class="btn btn-outline-info" type="submit">Search</button> 
             </form>
+            <div id="result_search">
+
+            </div>
         </div>
     </section>
 </main>

@@ -40,19 +40,17 @@ if (($searchQuery == null && $searchQuery == '' && $valCategory == null && $valC
     $ingredients = $resultats;
 }
 
-
-echo "<table class='table table-striped'>";
-foreach ($ingredients as $res) {
-    echo "<tr>";
-    echo "<td>".$res['name']."</td>";
-    echo "<td>".$res['category']."</td>";
-    echo "</tr>";
+if (sizeof($ingredients) === 0) {
+    echo "<div style='font-size: 20px; text-align: center; margin-top: 10px;'>Aucun ingredient</div>";
+} else {
+    echo "<table class='table table-striped'>";
+    foreach ($ingredients as $res) {
+        echo "<tr>";
+        echo "<td>".$res['name']."</td>";
+        echo "<td>".$res['category']."</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
 }
-echo "</table>";
-
-
-
-
-
 
 ?>

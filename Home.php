@@ -25,12 +25,7 @@
                 function(){
                     $('#result_search').html('');
                     var ingredient = $(this).val();
-
-                    if(ingredient != ""){  
-                        IngredientDunecategory(encodeURIComponent(ingredient), '')
-                    }else{
-                        document.getElementById('result_search').innerHTML ="<div style='font-size: 20px; text-align: center; margin-top: 10px; color:#F5F5F5'>Aucun ingredient</div>";
-                    }
+                    IngredientDunecategory(encodeURIComponent(ingredient), '')
                     
                     
                 }

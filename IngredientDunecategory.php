@@ -11,7 +11,7 @@ $option = array(
 $searchQuery = $_GET['searchQuery'];
 $valCategory = $_GET['valCategory'];
 
-$json = file_get_contents('data.json', false, stream_context_create($options));
+$json = file_get_contents('data.json', false, stream_context_create($option));
 $resultats = json_decode($json, true);
 
 $ingredients = array();

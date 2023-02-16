@@ -36,7 +36,7 @@ if ($valCategory != null && $valCategory != '') {
     }
 }
 
-if ($searchQuery == null && $searchQuery == '' && $valCategory == null && $valCategory == '') {
+if (($searchQuery == null && $searchQuery == '' && $valCategory == null && $valCategory == '') || $valCategory === 'Tous') {
     $ingredients = $resultats;
 }
 

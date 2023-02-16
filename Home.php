@@ -5,9 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/87f52fdadc.js" crossorigin="anonymous"></script>
+    <link href="./CSS/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="./CSS/home.css">
+    <script src="./JS/font.awesome.js" crossorigin="anonymous"></script>
     <script src="./JS/Fonctions.js"></script>
     <script src="./JS/JQuery 3.6.1.js"></script>
     <script src="./JS/db.js"></script>
@@ -52,7 +52,7 @@
 
 <main class="im">
     <section class="py-5">
-        <div class="container">
+        <div class="container search-area">
             <form class="d-flex ">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search">
                 <button class="btn btn-outline-info" type="submit">Search</button> 

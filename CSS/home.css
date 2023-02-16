@@ -10,9 +10,9 @@ h1{
 }
 .im{
     background-image: url('../Image/food.jpg');
-    
+    background-size: contain;
+
     height: 500px;
-    width: 1469px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,4 +24,10 @@ h1{
 }
 #div2{
     padding: 50px;
+}
+
+.search-area {
+    padding: 50px;
+    background: radial-gradient(#000, 40%, transparent 80%);
+    border-radius: 10%;
 }

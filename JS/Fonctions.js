@@ -7,18 +7,6 @@ const password = 'xBd9ZotdFoJXJ3MxyQY0qkuFeQT_W90WTeket8xemJ4';
 // To learn more about the driver: https://neo4j.com/docs/javascript-manual/current/client-applications/#js-driver-driver-object
 const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
 
-try {
-
-    findIngredients(driver);
-
-
-} catch (error) {
-    console.error(`Something went wrong: ${error}`);
-} finally {
-    // Don't forget to close the driver connection when you're finished with it.
-    driver.close();
-}
-
 
 async function IngredientDunecategory(searchQuery, valCategory) {
     const session = driver.session({ database: 'neo4j' });
@@ -53,7 +41,7 @@ async function IngredientDunecategory(searchQuery, valCategory) {
 
         if (ingredients.records && ingredients.records.length > 0) {
             ingredients.records.forEach(record => {
-                tr += `<tr onclick='IngredientsByClosestRelationships("${record.get('n.name')}")'>`;
+                tr += `<tr id = "scrollup" onclick='IngredientsByClosestRelationships("${record.get('n.name')}")'>`
                 tr += `<td><img src="./Image/icon_foods/${record.get('n.picture_name')}.jpeg" />&nbsp;&nbsp;${record.get('n.name')}</td><td>${record.get('n.food_group')}</td>`
                 tr += `</tr>`
             });
@@ -120,7 +108,7 @@ async function IngredientsByClosestRelationships(ingredientName) {
 
         if (readResult.records && readResult.records.length > 0) {
             readResult.records.forEach(record => {
-                tr += `<tr>`
+                tr += `<tr href='#myAnchor'>`
                 tr += `<td><img src="./Image/icon_foods/${record.get('i2.picture_name')}.jpeg" />&nbsp;&nbsp;${record.get('i2.name')}</td><td>${record.get('i2.food_group')}</td><td>${record.get('p.affinity')}</td>`
                 tr += `</tr>`
             });
@@ -128,7 +116,6 @@ async function IngredientsByClosestRelationships(ingredientName) {
         } else {
             tableDiv3.innerHTML += "<div style='font-size: 20px; text-align: center; margin-top: 10px;'>Aucun ingredient</div>"
         }
-
 
     } catch (error) {
         console.error(`Something went wrong: ${error}`);

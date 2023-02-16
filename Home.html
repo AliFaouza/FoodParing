@@ -30,7 +30,12 @@
                     var ingredient = $(this).val();
                     IngredientDunecategory(encodeURIComponent(ingredient), document.getElementById("datas-div2").value)
                     currentSearch = encodeURIComponent(ingredient)
-                });
+                }),
+                $("#datas-div1").click(function () {
+                    $("html, body").animate({ scrollTop: 500 }, 500);
+                    return false;
+                })
+
         });
 
     </script>
@@ -62,6 +67,7 @@
     </main>
 
     <section id="principal" class="py-5">
+        <a name="myAnchor" id="myAnchor"><strong>Where i want to go</strong></a>
         <div class="container">
             <div id="div2" class="col-12 col">
                 <select class='col-md-12 form-control text-center' id='datas-div2'
@@ -70,6 +76,7 @@
             </div>
 
             <div class="row gy-4 gy-md-0">
+                <div id="myAnchor"></div>
                 <div class="col-12 col-md-6" id="div1">
                     <h2>Les Ingrédients</h2>
                     <table class='table table-striped'>
@@ -102,7 +109,6 @@
                 </div>
 
             </div>
-
         </div>
     </section>
 

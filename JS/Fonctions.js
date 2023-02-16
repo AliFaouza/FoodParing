@@ -13,22 +13,22 @@ function GetAllCategory() {
             url: "./GetAllCategory.php",
             success: function (data) {
                 $('#div2').append(data);
-                IngredientDunecategory() 
+                IngredientDunecategory("", "") 
             },
             error: function () {
-                alert("Impossible de récuperer les données dans cette page");
+                alert("Impossible de récuperer les catégories");
             }
         }
 
     )
 }
 
-function IngredientDunecategory() {
+function IngredientDunecategory(searchQuery, valCategory) {
     $.ajax(
         {
             type: "get",
             url: "./IngredientDunecategory.php",
-            data: "idcategory"+idcategory,
+            data: "valCategory=" + valCategory + "&searchQuery=" + searchQuery,
             success: function (data) {
                 $('#div1').empty(data);
                 $('#div3').empty(data);
@@ -37,30 +37,11 @@ function IngredientDunecategory() {
                 $('#div3').append(data);
             },
             error: function () {
-                alert("Impossible de récuperer les données dans cette page");
+                alert("Impossible de récuperer les ingredients");
             }
         }
 
     )
 }
 
-function IngredientDunecategory() {
-    $.ajax(
-        {
-            type: "get",
-            url: "./IngredientDunecategory.php",
-            data: "idcategory"+idcategory,
-            success: function (data) {
-                $('#div1').empty(data);
-                $('#div3').empty(data);
 
-                $('#div1').append(data);
-                $('#div3').append(data);
-            },
-            error: function () {
-                alert("Impossible de récuperer les données dans cette page");
-            }
-        }
-
-    )
-}

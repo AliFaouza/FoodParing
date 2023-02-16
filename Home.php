@@ -10,14 +10,15 @@
     <link rel="stylesheet" href="./CSS/home.css">
     <script src="./JS/Fonctions.js"></script>
     <script src="./JS/JQuery 3.6.1.js"></script>
+    <script src="./JS/db.js"></script>
 
     <script>
         $(document).ready(function(){
-            $
-        (
+        $(
             function () 
             {
-                GetAllCategory();  
+                GetAllCategory();
+
             }
             
         ),
@@ -30,7 +31,7 @@
                 $.ajax({
                     type:'get',
                     url:'IngredientDunecategory.php',
-                    data:'ingredient'+encodeURIComponent(ingredient),
+                    data:'ingredient='+encodeURIComponent(ingredient),
                     success:function(data){
                       if(data != ""){
                           $('#div1').empty(data);

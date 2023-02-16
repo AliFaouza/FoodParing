@@ -9,7 +9,7 @@ $option = array(
 $json = file_get_contents('category.json',false, stream_context_create($options));
 $category = json_decode($json, true);
 
-echo "<select class='col-md-12 form-control text-center' id='lscategory' onchange = 'IngredientDunecategory(".$cat['idcategory'].")'>";
+echo "<select class='col-md-12 form-control text-center' id='lscategory' onchange = 'IngredientDunecategory(event)'>";
 echo "<option>Tous</option>";
 
 foreach ($category as $cat) {

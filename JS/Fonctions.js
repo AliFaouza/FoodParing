@@ -1,5 +1,12 @@
 var idcategory
+
+function getAllIngredients() {
+    // Appel a la base de donnée neo4j.
+    // Faire une requête pour récuperer les données
+}
+
 function GetAllCategory() {
+
     $.ajax(
         {
             type: "get",

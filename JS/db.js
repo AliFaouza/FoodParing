@@ -1,6 +1,4 @@
 (async () => {
-    const neo4j = require('neo4j-driver');
-
     const uri = 'neo4j+s://0145f88d.databases.neo4j.io';
     const user = 'neo4j';
     const password = 'xBd9ZotdFoJXJ3MxyQY0qkuFeQT_W90WTeket8xemJ4';
@@ -61,4 +59,5 @@
             await session.close();
         }
     }
+    return driver
 })();

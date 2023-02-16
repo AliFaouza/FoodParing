@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="./CSS/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="./CSS/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
     <link rel="stylesheet" href="./CSS/home.css">
+    <script src="./node_modules/neo4j-driver/lib/browser/neo4j-web.min.js"></script>
     <script src="./JS/font.awesome.js" crossorigin="anonymous"></script>
     <script src="./JS/Fonctions.js"></script>
     <script src="./JS/JQuery 3.6.1.js"></script>

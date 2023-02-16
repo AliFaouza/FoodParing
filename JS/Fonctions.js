@@ -9,7 +9,7 @@ const driver = neo4j.driver(uri, neo4j.auth.basic(user, password));
 
 try {
 
-   findIngredients(driver);
+    findIngredients(driver);
 
 
 } catch (error) {
@@ -19,20 +19,50 @@ try {
     driver.close();
 }
 
-async function findIngredients(driver) {
 
+async function IngredientDunecategory(searchQuery, valCategory) {
     const session = driver.session({ database: 'neo4j' });
 
     try {
-        const readQuery = `MATCH (n:Ingredient) RETURN n.name;`;
+        const readQuery = `MATCH (n:Ingredient) RETURN n.name, n.food_group LIMIT 100;`;
 
         const readResult = await session.executeRead(tx =>
             tx.run(readQuery)
         );
 
-        readResult.records.forEach(record => {
-            console.log(`Found ingredient: ${record.get('n.name')}`)
-        });
+        let ingredients = []
+
+        let tableDiv1 = document.getElementById("datas-div1");
+        tableDiv1.innerHTML = ""
+        let tr = "";
+
+        if (((searchQuery == null || searchQuery == '') && (valCategory == null || valCategory == ''))) {
+            ingredients = readResult
+        } else {
+            if (valCategory != null && valCategory != '' && valCategory != 'Tous') {
+                ingredients.records = ingredients.records?.length > 0 ? ingredients.records.filter(record => record.get('n.food_group').toLowerCase().includes(valCategory.toLowerCase()))
+                : readResult.records.filter(record => record.get('n.food_group').toLowerCase().includes(valCategory.toLowerCase()))
+            } else if (valCategory === 'Tous') {
+                ingredients = readResult
+            }
+            if (searchQuery != null && searchQuery != '') {
+                ingredients.records = ingredients.records?.length > 0 ? ingredients.records.filter(record => record.get('n.name').toLowerCase().includes(searchQuery.toLowerCase())) 
+                : readResult.records.filter(record => record.get('n.name').toLowerCase().includes(searchQuery.toLowerCase()))
+            }
+        }
+
+        if (ingredients.records && ingredients.records.length > 0) {
+            ingredients.records.forEach(record => {
+                tr += `<tr onclick='IngredientsByClosestRelationships("${record.get('n.name')}")'>`;
+                tr += `<td>${record.get('n.name')}</td><td>${record.get('n.food_group')}</td>`
+                tr += `</tr>`
+            });
+            tableDiv1.innerHTML += tr
+        } else {
+            tableDiv1.innerHTML += "<div style='font-size: 20px; text-align: center; margin-top: 10px;'>Aucun ingredient</div>"
+        }
+
+
     } catch (error) {
         console.error(`Something went wrong: ${error}`);
     } finally {
@@ -40,48 +70,69 @@ async function findIngredients(driver) {
     }
 }
 
-function getAllIngredients() {
-    // Appel a la base de donnée neo4j.
-    // Faire une requête pour récuperer les données
+
+async function GetAllCategory() {
+    const session = driver.session({ database: 'neo4j' });
+
+    try {
+        const readQuery = `MATCH (n) 
+        WHERE n.food_group IS NOT NULL
+        RETURN DISTINCT "node" as entity, n.food_group AS food_group LIMIT 100
+        UNION ALL 
+        MATCH ()-[r]-() 
+        WHERE r.food_group IS NOT NULL
+        RETURN DISTINCT "relationship" AS entity, r.food_group AS food_group LIMIT 100;`;
+
+        const readResult = await session.executeRead(tx =>
+            tx.run(readQuery)
+        );
+
+        let tableDiv2 = document.getElementById("datas-div2");
+        let tr = "";
+        tr += `<option value='Tous'>Tous</option>`;
+        readResult.records.forEach(record => {
+            tr += `<option value='${record.get('food_group')}'>${record.get('food_group')}</option>`;
+        });
+        tableDiv2.innerHTML += tr;
+        IngredientDunecategory("", "")
+    } catch (error) {
+        console.error(`Something went wrong: ${error}`);
+    } finally {
+        await session.close();
+    }
 }
 
-function GetAllCategory() {
+async function IngredientsByClosestRelationships(ingredientName) {
+    const session = driver.session({ database: 'neo4j' });
 
-    $.ajax(
-        {
-            type: "get",
-            url: "./GetAllCategory.php",
-            success: function (data) {
-                $('#div2').append(data);
-                IngredientDunecategory("", "") 
-            },
-            error: function () {
-                alert("Impossible de récuperer les catégories");
-            }
+    try {
+        const readQuery = `MATCH (i1:Ingredient {name:"${ingredientName}"})-[p:PAIRS_WITH]->(i2:Ingredient)
+        RETURN i2.name, i2.food_group, p.affinity
+        ORDER BY p.affinity DESC`;
+
+        const readResult = await session.executeRead(tx =>
+            tx.run(readQuery)
+        );
+
+        let tableDiv3 = document.getElementById("datas-div3");
+        tableDiv3.innerHTML = ""
+        let tr = "";
+
+        if (readResult.records && readResult.records.length > 0) {
+            readResult.records.forEach(record => {
+                tr += `<tr>`
+                tr += `<td>${record.get('i2.name')}</td><td>${record.get('i2.food_group')}</td><td>${record.get('p.affinity')}</td>`
+                tr += `</tr>`
+            });
+            tableDiv3.innerHTML += tr
+        } else {
+            tableDiv3.innerHTML += "<div style='font-size: 20px; text-align: center; margin-top: 10px;'>Aucun ingredient</div>"
         }
 
-    )
+
+    } catch (error) {
+        console.error(`Something went wrong: ${error}`);
+    } finally {
+        await session.close();
+    }
 }
-
-function IngredientDunecategory(searchQuery, valCategory) {
-    $.ajax(
-        {
-            type: "get",
-            url: "./IngredientDunecategory.php",
-            data: "valCategory=" + valCategory + "&searchQuery=" + searchQuery,
-            success: function (data) {
-                $('#div1').empty(data);
-                $('#div3').empty(data);
-
-                $('#div1').append(data);
-                $('#div3').append(data);
-            },
-            error: function () {
-                alert("Impossible de récuperer les ingredients");
-            }
-        }
-
-    )
-}
-
-

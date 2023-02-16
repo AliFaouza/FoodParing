@@ -8,6 +8,10 @@ h1{
 
    
 }
+tr {
+    cursor: pointer;
+}
+
 .im{
     background-image: url('../Image/food.jpg');
     background-size: contain;

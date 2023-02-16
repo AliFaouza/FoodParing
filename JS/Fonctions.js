@@ -24,7 +24,7 @@ async function IngredientDunecategory(searchQuery, valCategory) {
     const session = driver.session({ database: 'neo4j' });
 
     try {
-        const readQuery = `MATCH (n:Ingredient) RETURN n.name, n.food_group LIMIT 100;`;
+        const readQuery = `MATCH (n:Ingredient) RETURN n.name, n.food_group, n.picture_name LIMIT 100;`;
 
         const readResult = await session.executeRead(tx =>
             tx.run(readQuery)
@@ -54,7 +54,7 @@ async function IngredientDunecategory(searchQuery, valCategory) {
         if (ingredients.records && ingredients.records.length > 0) {
             ingredients.records.forEach(record => {
                 tr += `<tr onclick='IngredientsByClosestRelationships("${record.get('n.name')}")'>`;
-                tr += `<td>${record.get('n.name')}</td><td>${record.get('n.food_group')}</td>`
+                tr += `<td><img src="./Image/icon_foods/${record.get('n.picture_name')}.jpeg" />&nbsp;&nbsp;${record.get('n.name')}</td><td>${record.get('n.food_group')}</td>`
                 tr += `</tr>`
             });
             tableDiv1.innerHTML += tr
@@ -107,7 +107,7 @@ async function IngredientsByClosestRelationships(ingredientName) {
 
     try {
         const readQuery = `MATCH (i1:Ingredient {name:"${ingredientName}"})-[p:PAIRS_WITH]->(i2:Ingredient)
-        RETURN i2.name, i2.food_group, p.affinity
+        RETURN i2.name, i2.food_group, i2.picture_name, p.affinity
         ORDER BY p.affinity DESC`;
 
         const readResult = await session.executeRead(tx =>
@@ -121,7 +121,7 @@ async function IngredientsByClosestRelationships(ingredientName) {
         if (readResult.records && readResult.records.length > 0) {
             readResult.records.forEach(record => {
                 tr += `<tr>`
-                tr += `<td>${record.get('i2.name')}</td><td>${record.get('i2.food_group')}</td><td>${record.get('p.affinity')}</td>`
+                tr += `<td><img src="./Image/icon_foods/${record.get('i2.picture_name')}.jpeg" />&nbsp;&nbsp;${record.get('i2.name')}</td><td>${record.get('i2.food_group')}</td><td>${record.get('p.affinity')}</td>`
                 tr += `</tr>`
             });
             tableDiv3.innerHTML += tr

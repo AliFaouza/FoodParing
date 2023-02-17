@@ -1,5 +1,7 @@
 # Projet Hackathon - FoodPairing
 
+Le projet: https://github.com/AliFaouza/FoodParing
+
 ## Utilisations
 Pour utiliser la page commence par wamp et ouvrir la page depuis le localhost ou 127.0.0.1
 

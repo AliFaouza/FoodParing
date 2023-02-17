@@ -109,7 +109,7 @@ async function IngredientsByClosestRelationships(ingredientName) {
         if (readResult.records && readResult.records.length > 0) {
             readResult.records.forEach(record => {
                 tr += `<tr href='#myAnchor'>`
-                tr += `<td><img src="./Image/icon_foods/${record.get('i2.picture_name')}.jpeg" />&nbsp;&nbsp;${record.get('i2.name')}</td><td>${record.get('i2.food_group')}</td><td>${record.get('p.affinity')}</td>`
+                tr += `<td><img src="./Image/icon_foods/${record.get('i2.picture_name')}.jpeg" />&nbsp;&nbsp;${record.get('i2.name')}</td><td>${record.get('i2.food_group')}</td><td>${record.get('p.affinity')}</td><td><a style="cursor: pointer;" href="https://www.allrecipes.com/search?q=${record.get('i2.name')}" target="_blank"><i class="fa fa-external-link" style="font-size:24px"></i></a></td>`
                 tr += `</tr>`
             });
             tableDiv3.innerHTML += tr
